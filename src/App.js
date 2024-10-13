@@ -1,9 +1,11 @@
 import { makeStyles } from "@material-ui/core";
 import Homepage from "./Pages/HomePage";
 import "./App.css";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CoinPage from "./Pages/CoinPage";
 import Header from "./components/Header";
+import FavoritesPage from './Pages/FavoritesPage';
+import ProtectedRoute from "./components/ProtectedRoute"; // Correctly import the ProtectedRoute
 
 const useStyles = makeStyles(() => ({
   App: {
@@ -20,8 +22,15 @@ function App() {
     <BrowserRouter>
       <div className={classes.App}>
         <Header />
-        <Route path="/" component={Homepage} exact />
-        <Route path="/coins/:id" component={CoinPage} exact />
+        <Switch>
+          <Route path="/" component={Homepage} exact />
+          <Route path="/coins/:id">
+            <CoinPage />
+          </Route>
+          <Route path="/favorites">
+            <FavoritesPage />
+          </Route>
+        </Switch>
       </div>
     </BrowserRouter>
   );
