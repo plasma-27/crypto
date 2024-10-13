@@ -5,31 +5,38 @@ import {
   Select,
   Toolbar,
   Typography,
-} from "@material-ui/core";
+  Button,
+} from '@material-ui/core';
 import {
   createTheme,
   makeStyles,
   ThemeProvider,
-} from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
-import { CryptoState } from "../CryptoContext";
+} from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
+import { CryptoState } from '../CryptoContext';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   title: {
     flex: 1,
-    color: "gold",
-    fontFamily: "Montserrat",
-    fontWeight: "bold",
-    cursor: "pointer",
+    color: 'gold',
+    fontFamily: 'Montserrat',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+  },
+  loginButton: {
+    marginLeft: '60px', // Add margin to the left of the button
+    color: 'white',
+    textTransform: 'none',
+    fontWeight: 'bold',
   },
 }));
 
 const darkTheme = createTheme({
   palette: {
     primary: {
-      main: "#fff",
+      main: '#fff',
     },
-    type: "dark",
+    type: 'dark',
   },
 });
 
@@ -51,18 +58,23 @@ function Header() {
             >
               Crypto Hunter
             </Typography>
-            {/* <Button color="inherit">Login</Button> */}
             <Select
               variant="outlined"
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={currency}
               style={{ width: 100, height: 40, marginLeft: 15 }}
-              onChange={(e) => setCurrency(e.target.value)}
+              onChange={e => setCurrency(e.target.value)}
             >
-              <MenuItem value={"USD"}>USD</MenuItem>
-              <MenuItem value={"INR"}>INR</MenuItem>
+              <MenuItem value={'USD'}>USD</MenuItem>
+              <MenuItem value={'INR'}>INR</MenuItem>
             </Select>
+            <Button
+              className={classes.loginButton}
+              onClick={() => history.push('/login')} // Replace with your login path
+            >
+              LOGIN
+            </Button>
           </Toolbar>
         </Container>
       </AppBar>
